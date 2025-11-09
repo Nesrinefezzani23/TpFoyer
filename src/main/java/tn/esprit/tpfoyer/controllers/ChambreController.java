@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tpfoyer.entities.Chambre;
 import tn.esprit.tpfoyer.services.IChambreService;
+import tn.esprit.tpfoyer.entities.Reservation;
 
 import java.util.List;
 
@@ -36,6 +37,21 @@ public class ChambreController {
     @GetMapping("/getChambreById/{idChambre}")
     Chambre getChambreById(@PathVariable("idChambre") long id){
         return chambreService.findChambreById(id);
+    }
+
+    @PostMapping("/addChambreAndReservation")
+    Chambre addChambreAndReservation(@RequestBody Chambre chambre, @RequestBody Reservation reservation){
+        return chambreService.addChambreAndReservation(chambre, reservation);
+    }
+
+    @PutMapping("/assignReservation/{idChambre}/{idReservation}")
+    Chambre assignReservationToChambre(@PathVariable("idChambre") long idChambre, @PathVariable("idReservation") String idReservation){
+        return chambreService.assignReservationToChambre(idChambre, idReservation);
+    }
+
+    @PutMapping("/desassignReservation/{idChambre}/{idReservation}")
+    Chambre desassignReservationFromChambre(@PathVariable("idChambre") long idChambre, @PathVariable("idReservation") String idReservation){
+        return chambreService.desassignReservationFromChambre(idChambre, idReservation);
     }
     
 }
