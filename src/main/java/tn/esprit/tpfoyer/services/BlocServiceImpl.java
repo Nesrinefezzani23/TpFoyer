@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.dto.BlocDTO;
 import tn.esprit.tpfoyer.entities.Bloc;
+import tn.esprit.tpfoyer.entities.Foyer;
 import tn.esprit.tpfoyer.mappers.BlocMapper; // ⬅️ Import
 import tn.esprit.tpfoyer.repositories.BlocRepository;
+import tn.esprit.tpfoyer.repositories.FoyerRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 public class BlocServiceImpl implements IBlocService{
     final BlocRepository blocRepository;
     final BlocMapper blocMapper;
+    final FoyerRepository foyerRepository;
 
     @Override
     public Bloc addOrUpdateBloc(Bloc bloc) {
@@ -39,5 +42,39 @@ public class BlocServiceImpl implements IBlocService{
                 .orElseThrow(() -> new RuntimeException("Bloc non trouvé"));
 
         return blocMapper.toDto(bloc); // Conversion automatique
+    }
+
+    @Override
+    public Bloc addBlocAndFoyer(Bloc bloc, Long idFoyer) {
+        Foyer foyer = foyerRepository.findById(idFoyer)
+                .orElseThrow(() -> new RuntimeException("Foyer non trouvé"));
+        bloc.setFoyer(foyer);
+        foyer.getBlocs().add(bloc);
+        return blocRepository.save(bloc);
+    }
+
+    @Override
+    public Bloc assignBlocToFoyer(long idBloc, long idFoyer) {
+        Bloc bloc = blocRepository.findById(idBloc)
+                .orElseThrow(() -> new RuntimeException("Bloc non trouvé"));
+        Foyer foyer = foyerRepository.findById(idFoyer)
+                .orElseThrow(() -> new RuntimeException("Foyer non trouvé"));
+        bloc.setFoyer(foyer);
+        foyer.getBlocs().add(bloc);
+        return blocRepository.save(bloc);
+    }
+
+    @Override
+    public Bloc desassignBlocFromFoyer(long idBloc) {
+        Bloc bloc = blocRepository.findById(idBloc)
+                .orElseThrow(() -> new RuntimeException("Bloc non trouvé"));
+        Foyer ancienFoyer = bloc.getFoyer();
+        if (ancienFoyer != null) {
+            bloc.setFoyer(null);
+            ancienFoyer.getBlocs().remove(bloc);
+            return blocRepository.save(bloc);
+        }
+        // Si aucun Foyer n'était affecté, on retourne le Bloc tel quel.
+        return bloc;
     }
 }

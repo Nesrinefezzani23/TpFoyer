@@ -7,12 +7,13 @@ import java.util.List;
 
 public interface IBlocService {
 
-    // Ajout/Modification utilise l'Entité pour la persistance
     Bloc addOrUpdateBloc(Bloc bloc);
-
     void deleteBloc(long id);
-
-    // Consultation utilise le DTO pour l'API
+    //DTO
     List<BlocDTO> findAllBloc();
     BlocDTO findBlocById(long id);
+    //Affectation & Désaffectation
+    Bloc addBlocAndFoyer(Bloc bloc, Long idFoyer);
+    Bloc assignBlocToFoyer(long idBloc, long idFoyer);
+    Bloc desassignBlocFromFoyer(long idBloc);
 }

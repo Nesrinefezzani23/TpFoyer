@@ -38,4 +38,19 @@ public class BlocController {
     BlocDTO getBlocById(@PathVariable("idBloc") long id){ // Type de retour DTO
         return blocService.findBlocById(id);
     }
+
+    @PostMapping("/addBlocAndAssignFoyer/{idFoyer}")
+    Bloc addBlocAndAssignFoyer(@RequestBody Bloc bloc, @PathVariable long idFoyer){
+        return blocService.addBlocAndFoyer(bloc, idFoyer);
+    }
+
+    @PutMapping("/assignBlocToFoyer/{idBloc}/{idFoyer}")
+    Bloc assignBlocToFoyer(@PathVariable("idBloc") long idBloc, @PathVariable("idFoyer") long idFoyer){
+        return blocService.assignBlocToFoyer(idBloc, idFoyer);
+    }
+
+    @PutMapping("/desassignBlocFromFoyer/{idBloc}")
+    Bloc desassignBlocFromFoyer(@PathVariable("idBloc") long idBloc){
+        return blocService.desassignBlocFromFoyer(idBloc);
+    }
 }
