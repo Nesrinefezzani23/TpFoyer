@@ -36,12 +36,6 @@ public class ChambreServiceImpl implements IChambreService{
     }
 
     @Override
-    public Chambre addChambreAndReservation(Chambre chambre, Reservation reservation) {
-        chambre.getReservation().add(reservation);
-        return chambreRepository.save(chambre);
-    }
-
-    @Override
     public Chambre assignReservationToChambre(long idChambre, String idReservation) {
         Chambre chambre = chambreRepository.findById(idChambre)
                 .orElseThrow(() -> new RuntimeException("Chambre non trouvée"));

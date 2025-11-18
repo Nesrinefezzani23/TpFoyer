@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,5 +19,7 @@ public class Reservation {
     boolean estValide;
 
     @ManyToMany
+    @JsonIgnore
+
     Set<Etudiant> etudiants;
 }

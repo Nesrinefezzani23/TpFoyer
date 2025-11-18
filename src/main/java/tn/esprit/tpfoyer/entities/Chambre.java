@@ -1,9 +1,12 @@
 package tn.esprit.tpfoyer.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.lang.reflect.Type;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,8 +24,9 @@ public class Chambre {
     TypeChambre typeC;
 
     @ManyToOne
+            @JsonIgnore
     Bloc bloc;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Reservation> reservation;
+    private Set<Reservation> reservation=new HashSet<Reservation>();
 }

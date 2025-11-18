@@ -39,11 +39,6 @@ public class ChambreController {
         return chambreService.findChambreById(id);
     }
 
-    @PostMapping("/addChambreAndReservation")
-    Chambre addChambreAndReservation(@RequestBody Chambre chambre, @RequestBody Reservation reservation){
-        return chambreService.addChambreAndReservation(chambre, reservation);
-    }
-
     @PutMapping("/assignReservation/{idChambre}/{idReservation}")
     Chambre assignReservationToChambre(@PathVariable("idChambre") long idChambre, @PathVariable("idReservation") String idReservation){
         return chambreService.assignReservationToChambre(idChambre, idReservation);

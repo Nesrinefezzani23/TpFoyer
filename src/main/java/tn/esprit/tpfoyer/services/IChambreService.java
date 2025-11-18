@@ -11,7 +11,6 @@ public interface IChambreService {
     List<Chambre> findAllChambre();
     Chambre findChambreById(long id);
     //Affectation & Desaffectation
-    Chambre addChambreAndReservation(Chambre chambre, Reservation reservation);
     Chambre assignReservationToChambre(long idChambre, String idReservation);
     Chambre desassignReservationFromChambre(long idChambre, String idReservation);
 }
