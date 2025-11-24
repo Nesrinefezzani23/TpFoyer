@@ -8,8 +8,8 @@ import java.util.List;
 @Repository
 public interface BlocRepository extends JpaRepository<Bloc, Long> {
     List<Bloc> findByFoyerIsNull();
-    List<Bloc> findByCapaciteGreaterThan(Integer capacite);
-    List<Bloc> findByNomStartingWith(String prefix);
-    List<Bloc> findByNomStartingWithAndCapaciteGreaterThan(String prefix, Integer capacite);
+    List<Bloc> findByCapaciteBlocGreaterThan(long capacite);
+    List<Bloc> findByNomBlocStartingWith(String prefix);
+    List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String prefix, long capacite);
 
 }

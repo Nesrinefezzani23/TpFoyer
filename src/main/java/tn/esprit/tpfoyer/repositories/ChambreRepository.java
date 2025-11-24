@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface ChambreRepository extends JpaRepository<Chambre, Long> {
-    List<Chambre> findByType(String type);
-    Optional<Chambre> findByNumero(String numero);
+    List<Chambre> findByTypeC(String type);
+    Optional<Chambre> findByNumeroChambre(long numero);
 }

@@ -15,7 +15,7 @@ public class Bloc {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long idBloc;
     String nomBloc;
-    String capaciteBloc;
+    long capaciteBloc;
 
     @ManyToOne
     Foyer foyer;
