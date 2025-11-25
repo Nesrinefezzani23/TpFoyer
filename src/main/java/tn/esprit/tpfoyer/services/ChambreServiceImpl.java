@@ -8,6 +8,7 @@ import tn.esprit.tpfoyer.repositories.ChambreRepository;
 import tn.esprit.tpfoyer.repositories.ReservationRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Service
@@ -53,5 +54,15 @@ public class ChambreServiceImpl implements IChambreService{
                 .orElseThrow(() -> new RuntimeException("Réservation non trouvée"));
         chambre.getReservation().remove(reservation);
         return chambreRepository.save(chambre);
+    }
+
+    @Override
+    public List<Chambre> findByTypeC(String type) {
+        return chambreRepository.findByTypeC(type);
+    }
+
+    @Override
+    public Optional<Chambre> findByNumeroChambre(long numero) {
+        return chambreRepository.findByNumeroChambre(numero);
     }
 }

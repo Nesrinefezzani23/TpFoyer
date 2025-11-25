@@ -4,6 +4,7 @@ import tn.esprit.tpfoyer.entities.Chambre;
 import tn.esprit.tpfoyer.entities.Reservation;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IChambreService {
     Chambre addOrUpdateChambre(Chambre chambre);
@@ -13,4 +14,7 @@ public interface IChambreService {
     //Affectation & Desaffectation
     Chambre assignReservationToChambre(long idChambre, String idReservation);
     Chambre desassignReservationFromChambre(long idChambre, String idReservation);
+    //Keywords
+    List<Chambre> findByTypeC(String type);
+    Optional<Chambre> findByNumeroChambre(long numero);
 }
