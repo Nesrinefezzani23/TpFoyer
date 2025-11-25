@@ -2,6 +2,7 @@ package tn.esprit.tpfoyer.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import tn.esprit.tpfoyer.dto.BlocDTO;
 import tn.esprit.tpfoyer.entities.Bloc;
 import tn.esprit.tpfoyer.entities.Foyer;
@@ -76,5 +77,25 @@ public class BlocServiceImpl implements IBlocService{
         }
         // Si aucun Foyer n'était affecté, on retourne le Bloc tel quel.
         return bloc;
+    }
+
+    @Override
+    public List<Bloc> findByFoyerIsNull() {
+        return blocRepository.findByFoyerIsNull();
+    }
+
+    @Override
+    public List<Bloc> findByCapaciteBlocGreaterThan(@PathVariable("c") long capacite) {
+        return blocRepository.findByCapaciteBlocGreaterThan(capacite);
+    }
+
+    @Override
+    public List<Bloc> findByNomBlocStartingWith(@PathVariable("t") String prefix) {
+        return blocRepository.findByNomBlocStartingWith(prefix);
+    }
+
+    @Override
+    public List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String prefix, long capacite) {
+        return blocRepository.findByNomBlocStartingWithAndCapaciteBlocGreaterThan(prefix, capacite);
     }
 }

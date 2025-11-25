@@ -16,4 +16,10 @@ public interface IBlocService {
     Bloc addBlocAndFoyer(Bloc bloc, Long idFoyer);
     Bloc assignBlocToFoyer(long idBloc, long idFoyer);
     Bloc desassignBlocFromFoyer(long idBloc);
+    //Keywords
+    List<Bloc> findByFoyerIsNull();
+    List<Bloc> findByCapaciteBlocGreaterThan(long capacite);
+    List<Bloc> findByNomBlocStartingWith(String prefix);
+    List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String prefix, long capacite);
+
 }

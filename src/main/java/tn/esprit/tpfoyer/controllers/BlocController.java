@@ -53,4 +53,25 @@ public class BlocController {
     Bloc desassignBlocFromFoyer(@PathVariable("idBloc") long idBloc){
         return blocService.desassignBlocFromFoyer(idBloc);
     }
+
+    @GetMapping("/findByFoyerIsNull")
+    List<Bloc> findByFoyerIsNull(){
+        return blocService.findByFoyerIsNull();
+    }
+
+    @GetMapping("/findByCapaciteBlocGreaterThan/{c}")
+    List<Bloc> findByCapaciteBlocGreaterThan(@PathVariable("c") long capacite){
+        return blocService.findByCapaciteBlocGreaterThan(capacite);
+    }
+
+    @GetMapping("/findByNomBlocStartingWith/{p}")
+    List<Bloc> findByNomBlocStartingWith(@PathVariable("p") String prefix){
+        return blocService.findByNomBlocStartingWith(prefix);
+    }
+
+    @GetMapping("/findByNomBlocStartingWithAndCapaciteBlocGreaterThan/{p}/{c}")
+    List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(@PathVariable("p") String prefix, @PathVariable("c") long capacite){
+        return blocService.findByNomBlocStartingWithAndCapaciteBlocGreaterThan(prefix, capacite);
+    }
+
 }
