@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entities.Bloc;
 import tn.esprit.tpfoyer.entities.Chambre;
 import tn.esprit.tpfoyer.entities.Reservation;
+import tn.esprit.tpfoyer.entities.TypeChambre;
 import tn.esprit.tpfoyer.repositories.BlocRepository;
 import tn.esprit.tpfoyer.repositories.ChambreRepository;
 import tn.esprit.tpfoyer.repositories.ReservationRepository;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 
@@ -97,6 +99,29 @@ public class ChambreServiceImpl implements IChambreService{
                 log.info("Pas de chambre disponible dans ce bloc");
             }
             log.info("*****************************");
+        }
+    }
+
+    @Scheduled(cron = "0 */5 * * * *")
+    @Override
+    public void pourcentageChambreParTypeChambre() {
+        long totalChambres = chambreRepository.count();
+
+        log.info("Nombre total des chambre: {}", totalChambres);
+
+        if (totalChambres == 0) {
+            log.info("Aucune chambre trouvée pour calculer les pourcentages.");
+            return;
+        }
+
+        for (TypeChambre type : TypeChambre.values()) {
+            long countByType = chambreRepository.countByTypeC(type);
+            double pourcentage = (double) countByType / totalChambres * 100.0;
+            String formattedPercentage = String.format(Locale.US, "%.1f", pourcentage);
+
+            log.info("Le pourcentage des chambres pour le type {} est égale à {}",
+                    type.name(),
+                    formattedPercentage);
         }
     }
 }

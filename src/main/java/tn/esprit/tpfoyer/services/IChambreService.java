@@ -17,4 +17,6 @@ public interface IChambreService {
     //Keywords
     List<Chambre> findByTypeC(String type);
     Optional<Chambre> findByNumeroChambre(long numero);
+    //Service 02 Scheduler
+    void pourcentageChambreParTypeChambre();
 }
