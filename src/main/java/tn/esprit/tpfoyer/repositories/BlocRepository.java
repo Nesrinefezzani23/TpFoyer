@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import tn.esprit.tpfoyer.entities.Bloc;
 
@@ -11,5 +12,6 @@ public interface BlocRepository extends JpaRepository<Bloc, Long> {
     List<Bloc> findByCapaciteBlocGreaterThan(long capacite);
     List<Bloc> findByNomBlocStartingWith(String prefix);
     List<Bloc> findByNomBlocStartingWithAndCapaciteBlocGreaterThan(String prefix, long capacite);
-
+    @Query("SELECT b FROM Bloc b LEFT JOIN FETCH b.chambres")
+    List<Bloc> findAllWithChambres();
 }
