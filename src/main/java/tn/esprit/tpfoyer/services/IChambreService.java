@@ -19,4 +19,6 @@ public interface IChambreService {
     Optional<Chambre> findByNumeroChambre(long numero);
     //Service 02 Scheduler
     void pourcentageChambreParTypeChambre();
+    //Service 03 Scheduler
+    void nbPlacesDisponibleParChambreAnneeEnCours();
 }

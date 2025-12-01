@@ -124,4 +124,35 @@ public class ChambreServiceImpl implements IChambreService{
                     formattedPercentage);
         }
     }
+
+    private int getCapaciteParType(TypeChambre type) {
+        switch (type) {
+            case SIMPLE: return 1;
+            case DOUBLE: return 2;
+            case TRIPLE: return 3;
+            default: return 0;
+        }
+    }
+
+    @Scheduled(cron = "0 */5 * * * *")
+    @Override
+    public void nbPlacesDisponibleParChambreAnneeEnCours() {
+        List<Chambre> chambres = chambreRepository.findAllWithReservations();
+
+        for (Chambre chambre : chambres) {
+            TypeChambre type = chambre.getTypeC();
+            long numero = chambre.getNumeroChambre();
+            int capaciteTotale = getCapaciteParType(type);
+            int nbPlacesOccupees = chambre.getReservation() != null ? chambre.getReservation().size() : 0;
+            int nbPlacesDisponibles = capaciteTotale - nbPlacesOccupees;
+            if (nbPlacesDisponibles <= 0) {
+                log.info("La chambre {} {} est complete", type, numero);
+            } else {
+                log.info("Le nombre de place disponible pour la chambre {} {} est {}",
+                        type,
+                        numero,
+                        nbPlacesDisponibles);
+            }
+        }
+    }
 }
