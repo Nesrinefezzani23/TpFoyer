@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ChambreRepository extends JpaRepository<Chambre, Long> {
-    List<Chambre> findByTypeC(String type);
+    List<Chambre> findByTypeC(TypeChambre type);
     Optional<Chambre> findByNumeroChambre(long numero);
     long countByTypeC(TypeChambre type);
     @Query("SELECT c FROM Chambre c LEFT JOIN FETCH c.reservation")

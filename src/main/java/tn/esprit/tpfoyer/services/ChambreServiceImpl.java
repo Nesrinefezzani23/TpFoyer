@@ -66,7 +66,7 @@ public class ChambreServiceImpl implements IChambreService{
     }
 
     @Override
-    public List<Chambre> findByTypeC(String type) {
+    public List<Chambre> findByTypeC(TypeChambre type) {
         return chambreRepository.findByTypeC(type);
     }
 

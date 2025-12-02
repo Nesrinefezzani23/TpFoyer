@@ -3,6 +3,7 @@ package tn.esprit.tpfoyer.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tpfoyer.entities.Chambre;
+import tn.esprit.tpfoyer.entities.TypeChambre;
 import tn.esprit.tpfoyer.services.IChambreService;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public class ChambreController {
     }
 
     @GetMapping("/findByTypeC/{t}")
-    List<Chambre> findByTypeC(@PathVariable("t") String type){
+    List<Chambre> findByTypeC(@PathVariable("t") TypeChambre type){
         return chambreService.findByTypeC(type);
     }
 

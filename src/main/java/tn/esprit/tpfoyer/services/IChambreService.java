@@ -2,6 +2,7 @@ package tn.esprit.tpfoyer.services;
 
 import tn.esprit.tpfoyer.entities.Chambre;
 import tn.esprit.tpfoyer.entities.Reservation;
+import tn.esprit.tpfoyer.entities.TypeChambre;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ public interface IChambreService {
     Chambre assignReservationToChambre(long idChambre, String idReservation);
     Chambre desassignReservationFromChambre(long idChambre, String idReservation);
     //Keywords
-    List<Chambre> findByTypeC(String type);
+    List<Chambre> findByTypeC(TypeChambre type);
     Optional<Chambre> findByNumeroChambre(long numero);
     //Service 02 Scheduler
     void pourcentageChambreParTypeChambre();
