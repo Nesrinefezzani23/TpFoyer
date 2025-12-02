@@ -59,4 +59,9 @@ public class ChambreController {
     Optional<Chambre> findByNumeroChambre(@PathVariable("n") long numero){
         return chambreService.findByNumeroChambre(numero);
     }
+
+    @GetMapping("/findChambreByEtudiantCin/{cin}")
+    public Chambre findChambreByEtudiantCin(@PathVariable("cin") long cin) {
+        return chambreService.findChambreByEtudiantCin(cin);
+    }
 }

@@ -22,4 +22,6 @@ public interface IChambreService {
     void pourcentageChambreParTypeChambre();
     //Service 03 Scheduler
     void nbPlacesDisponibleParChambreAnneeEnCours();
+    //JPQL
+    Chambre findChambreByEtudiantCin(long cinEtudiant);
 }

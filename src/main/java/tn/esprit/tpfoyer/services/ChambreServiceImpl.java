@@ -155,4 +155,9 @@ public class ChambreServiceImpl implements IChambreService{
             }
         }
     }
+
+    @Override
+    public Chambre findChambreByEtudiantCin(long cinEtudiant) {
+        return chambreRepository.findChambreByEtudiantCinJPQL(cinEtudiant);
+    }
 }
